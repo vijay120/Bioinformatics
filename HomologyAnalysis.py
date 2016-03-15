@@ -135,7 +135,7 @@ class HomologyAnalysis:
 		:param frame_index: Where to start looking
 		:return: The index of the A in the start codon
 		"""
-		for index in xrange(frame_index, len(sequence) - 2):
+		for index in range(frame_index, len(sequence) - 2):
 			"""
 			Looks for a start codon.  Short circuits so if an A isn't found it just keeps going.
 			"""
@@ -175,7 +175,7 @@ class HomologyAnalysis:
 		:return: Created protein sequence
 		"""
 		protein_sequence = ""
-		for frame_pos in xrange(frame_index, len(sequence) - 2, 3):
+		for frame_pos in range(frame_index, len(sequence) - 2, 3):
 			codon = sequence[frame_pos] + sequence[frame_pos + 1] + sequence[frame_pos + 2]
 			if HomologyAnalysis.CODON_MAP.get(codon) is None:
 				""" FNA supports variable sequences, so we will too """

@@ -1,7 +1,7 @@
 
 def patternCount(dnaText, pattern):
     count = 0
-    for i in xrange(0, len(dnaText) - len(pattern)):
+    for i in range(0, len(dnaText) - len(pattern)):
         word = dnaText[i:i+len(pattern)]
         if (word == pattern):
             count = count + 1
@@ -9,13 +9,13 @@ def patternCount(dnaText, pattern):
 
 def freqWordProblem(text, k):
     countWords = []
-    for i in xrange(0, len(text) - k):
+    for i in range(0, len(text) - k):
         pattern = text[i:i+k]
         countWords.append(patternCount(text, pattern))
 
     maxCount = 0
     indexes = []
-    for j in xrange(0, len(countWords)):
+    for j in range(0, len(countWords)):
         count = countWords[j]
         if (count == maxCount):
             indexes.append(j)
@@ -43,7 +43,7 @@ def complimentDNA(text):
 
 def patternFind(text, pattern):
     index = []
-    for i in xrange(0,len(text)-len(pattern)):
+    for i in range(0,len(text)-len(pattern)):
         word = text[i:i+len(pattern)]
         if word == pattern:
             index.append(i)
