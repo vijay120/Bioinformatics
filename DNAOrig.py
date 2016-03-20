@@ -58,6 +58,27 @@ def freqWordProblem(text, k):
 
     return list(result)
 
+import math
+import numpy as np
+from numpy.linalg import inv
+
+def PatternToNumber(dnaWord):
+    mapping = ['A', 'C', 'G', 'T']
+    result = 0
+    for i in range(0, len(dnaWord)):
+        exponent = len(dnaWord) - i - 1
+        result = result + (math.pow(4, exponent) * mapping.index(dnaWord[i]))
+    return int(result)
+
+def NumberToPattern(origValue, length):
+    mapDNA = ["A", "C", "G", "T"]
+    value = origValue
+    result = ""
+    while(value > 3):
+        remainder = value % 4
+        result = mapDNA[remainder] + result
+        value = value/4
+    return result
 
 def comprehensiveFreq(text, k):
     mapping = {}
@@ -65,6 +86,17 @@ def comprehensiveFreq(text, k):
         pattern = text[i:i+k]
         mapping[pattern] = patternCount(text, pattern)
     return mapping
+
+def ComputingFrequencies(Text, k):
+    frequencyArray = []
+    for i in range(0, math.pow(4, k-1)):
+        frequencyArray.append(0)
+
+    for i in range(0, len(Text) - k + 1):
+        textVal = Text[i:i+k]
+        frequencyArray[PatternToNumber(textVal)] = frequencyArray[PatternToNumber(textVal)] + 1
+
+    return frequencyArray
 
 mapDNA = {
     "A": "T",
@@ -86,29 +118,8 @@ def patternFind(text, pattern):
             index.append(i)
     return index
 
-import math
-import numpy as np
-from numpy.linalg import inv
 
-def PatternToNumber(dnaWord):
-    mapping = ['A', 'C', 'G', 'T']
-    result = 0
-    for i in range(0, len(dnaWord)):
-        exponent = len(dnaWord) - i - 1
-        result = result + (math.pow(4, exponent) * mapping.index(dnaWord[i]))
-    return int(result)
-
-
-def NumberToPattern(value, length):
-    operator = np.ones((1, length))
-    operand = np.zeros((1, 1))
-    operand[0] = value
-    for i in range(0, length):
-        operator[0][i] = math.pow(4, length-1-i)
-    print(np.dot(np.transpose(operator), operator))
-    return np.dot(np.dot(inv(np.dot(np.transpose(operator), operator)), np.transpose(operator)), operand)
-
-print(NumberToPattern(5437, 8))
+print(NumberToPattern(45, 4))
 
 # print(PatternToNumber("ATGCAA"))
 
